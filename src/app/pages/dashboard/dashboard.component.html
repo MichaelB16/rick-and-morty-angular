@@ -51,7 +51,9 @@
   <div class="w-[250px]"></div>
 </div>
 
-@if (listCardDashboard$ | async; as state) { @if (state.loading || !state.data.length) {
+@if (listCardDashboard$ | async; as state) { @if(state.error) {
+<app-error />
+} @else if (state.loading && !state.error|| !state.data.length) {
 <app-loading />
 } @else if (!state.loading && state.data.length) {
 <div class="grid xs:grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">

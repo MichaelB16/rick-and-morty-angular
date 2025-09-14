@@ -11,11 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { ErrorComponent } from '../../components/error/error.component';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     CardDashboardComponent,
+    ErrorComponent,
     AsyncPipe,
     InputTextModule,
     FloatLabelModule,
