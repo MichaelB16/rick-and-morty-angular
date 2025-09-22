@@ -1,0 +1,42 @@
+<app-header /> @if (details$ | async; as details) {
+<div class="flex mt-2 w-full">
+    <div class="col w-full">
+        <p-card>
+            <ng-template #title>
+                <div class="flex flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div>
+                            <img class="w-[60px] h-[60px] rounded-full" [src]="details.data.image" alt="banner" />
+                        </div>
+                        <div class="flex flex-col gap-0.5">
+                            <b class="text-[16px] text-gray-500">{{ details.data.name }}</b>
+                            <div class="text-[12px] text-gray-400">
+                                <i class="pi pi-asterisk !text-[10px]"></i> {{ details.data.status }}
+                            </div>
+                            <div class="text-[12px] text-gray-400">
+                                <i class="pi pi-map-marker !text-[10px]"></i> {{ details.data.location.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a pButton variant="text" size="small" severity="secondary" href="/">
+                            <i class="pi pi-arrow-left" pButtonIcon></i>
+                            <span pButtonLabel>Voltar</span>
+                        </a>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="flex mt-4 flex-col gap-2">
+                @for(item of details.data.episode; track item; let index = $index) {
+                <a class="rounded-full py-2 px-4 border border-gray-200">
+                    <div class="flex items-center gap-2">
+                        <i class="pi pi-youtube text-[16px] text-red-400"></i>
+                        <b class="text-[14px] text-gray-500">Episódio {{ index + 1 }}</b>
+                    </div>
+                </a>
+                }
+            </div>
+        </p-card>
+    </div>
+</div>
+}

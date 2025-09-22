@@ -3,11 +3,13 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { BadgeModule } from 'primeng/badge';
 import { TooltipModule } from 'primeng/tooltip';
+import { SkeletonModule } from 'primeng/skeleton';
 import { caseStatus, statusType } from '../../models/card-dashboard.mode';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-card-dashboard',
-  imports: [CardModule, ButtonModule, BadgeModule, TooltipModule],
+  imports: [CardModule, ButtonModule, BadgeModule, TooltipModule, RouterModule, SkeletonModule],
   templateUrl: './card-dashboard.component.html',
   styleUrl: './card-dashboard.component.scss',
 })
@@ -17,6 +19,8 @@ export class CardDashboardComponent {
   @Input() image: string = '';
   @Input() status: string = '';
   @Input() location: string = '';
+  @Input() id!: number;
+  @Input() loading: boolean = false;
 
   private readonly caseStatus: Record<statusType, caseStatus> = {
     alive: {
@@ -41,8 +45,12 @@ export class CardDashboardComponent {
     },
   };
 
-  get getStatus(): caseStatus {
+  get statusInfo(): caseStatus {
     const status = this.status.toLowerCase() as statusType;
     return this.caseStatus[status] || this.caseStatus.default;
+  }
+
+  get linkRoute() {
+    return `${this.id}`;
   }
 }

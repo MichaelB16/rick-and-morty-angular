@@ -9,6 +9,7 @@ export interface ICharacter {
   image: string;
   url: string;
   created: string;
+  episode: string[];
   location: {
     name: string;
   };

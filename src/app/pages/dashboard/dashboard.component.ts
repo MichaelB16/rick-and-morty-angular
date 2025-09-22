@@ -10,13 +10,15 @@ import { AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
-import { LoadingComponent } from '../../components/loading/loading.component';
 import { ErrorComponent } from '../../components/error/error.component';
+import { HeaderComponent } from '../../components/header/header.component';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     CardDashboardComponent,
+    LoadingComponent,
     ErrorComponent,
     AsyncPipe,
     InputTextModule,
@@ -24,7 +26,7 @@ import { ErrorComponent } from '../../components/error/error.component';
     FormsModule,
     ButtonModule,
     PaginationComponent,
-    LoadingComponent,
+    HeaderComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -54,7 +56,9 @@ export class DashboardComponent {
           pagination: {} as IInfo,
           data: [] as ICharacter[],
         }),
-        catchError(() => of({ loading: false, error: true, pagination: {} as IInfo, data: [] as ICharacter[] }))
+        catchError(() =>
+          of({ loading: false, error: true, pagination: {} as IInfo, data: [] as ICharacter[] })
+        )
       )
     )
   );
