@@ -1,3 +1,4 @@
+<!-- Header com campo de busca -->
 <app-header>
   <p-floatlabel variant="in">
     <input
@@ -11,6 +12,8 @@
       autocomplete="off"
     />
     <label for="in_label">Buscar</label>
+
+    <!-- Botão de busca -->
     <p-button
       [disabled]="!filter.value.search.length"
       class="absolute cursor-pointer top-2.5 right-2"
@@ -21,14 +24,18 @@
       (click)="handleSearch()"
       severity="primary"
       size="small"
-    ></p-button>
+    />
   </p-floatlabel>
 </app-header>
-@if (listCardDashboard$ | async; as state) { @if(state.error) {
-<app-error /> } @else { @if(state.loading) {
-<app-loading></app-loading>
-@for(item in [].fill(20); track item) {
-<app-card-dashboard [loading]="true" /> } }
+
+<!-- Conteúdo principal do dashboard -->
+@if (listCardDashboard$ | async; as state) {
+<!-- Estado de erro -->
+@if (state.error) {
+<app-error /> } @else if (state.loading) {
+<!-- Estado de carregamento -->
+<app-loading /> } @else {
+<!-- Grid de cards dos personagens -->
 <div class="grid xs:grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
   @for (item of state.data; track item.id) {
   <app-card-dashboard
@@ -42,12 +49,13 @@
   />
   }
 </div>
-@if(!state.loading) {
-<div>
+
+<!-- Paginação -->
+<div class="mt-6 flex border-t-2 border-[#f1f5f9] justify-center">
   <app-pagination
     [currentPage]="filter.value.page"
     (setPage)="handleSetPage($event)"
     [total]="state.pagination.count"
   />
 </div>
-} } }
+} }
